@@ -194,7 +194,7 @@ namespace fsconfig
         if ( value.empty() )
             return;
         
-        ofs.write( std::begin( value ) , value.size() );
+        ofs.write( &( value.front() ) , value.size() );
     }
 
     bool config::is_set( ::std::string_view field_or_group )
