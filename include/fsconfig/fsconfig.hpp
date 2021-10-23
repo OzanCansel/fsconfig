@@ -197,10 +197,10 @@ namespace fsconfig
         ofs.write( std::begin( value ) , value.size() );
     }
 
-    bool config::is_set( ::std::string_view field )
+    bool config::is_set( ::std::string_view field_or_group )
     {
         return ::std::filesystem::exists(
-            ::std::filesystem::path { m_root }.append( field )
+            ::std::filesystem::path { m_root }.append( field_or_group )
         );
     }
 
