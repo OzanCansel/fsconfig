@@ -191,7 +191,7 @@ namespace fsconfig
 
         ::std::ofstream ofs { field_path.generic_string() };
 
-        if ( ofs.fail() || ofs.bad() )
+        if ( ofs.fail() )
             throw key_cannot_opened_or_created { ::std::string { field } };
 
         if ( value.empty() )
