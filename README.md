@@ -27,7 +27,7 @@ sudo cmake --build . --target install -- -j$(nproc)
 
 
 #### Way 1.1.
-- Include __fsconfig__ to your CMake project with `find_package( fsconfig )`
+- Include __fsconfig__ to your cmake project with `find_package( fsconfig )`
 ``` cmake
 cmake_minimum_required( VERSION 3.10 )
 project( my_project )
@@ -41,10 +41,10 @@ target_link_libraries( my_binary PRIVATE fsconfig::fsconfig )
 ```
 
 #### Way 1.2.
-- It is not obliged to be included by a CMake project. fsconfig is header only so it will be visible after it is installed to the system. So just include it and make sure that you enabled C++17 standard.
+- It is not obliged to be included by a cmake project. fsconfig is header only so it will be visible after it is installed to the system. So just include it and make sure that you enabled C++17 standard.
 
 ### Way 2. Add as a subdirectory
-- Add as an subdirectory to your existing project which uses cmake.
+- Add as an subdirectory to your existing cmake project.
 
 ```bash
 cd already_existing_project
