@@ -60,5 +60,6 @@ export( EXPORT fsconfig-targets
     NAMESPACE fsconfig::
 )
 
+add_subdirectory( example )
 enable_testing()
 add_subdirectory( test )
