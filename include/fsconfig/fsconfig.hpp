@@ -82,9 +82,11 @@ namespace fsconfig
                         ,   m_field { field }
                     {   }
 
-                    void operator=( ::std::string_view value )
+                    field_reference& operator=( ::std::string_view value )
                     {
                         m_config.set( m_field , value );
+
+                        return *this;
                     }
 
                     ::std::string value() const
