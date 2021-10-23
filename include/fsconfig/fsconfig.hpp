@@ -165,7 +165,7 @@ namespace fsconfig
 
         ifs.read( &( content[ 0 ] ) , size );
 
-        if ( ifs.bad() || ifs.fail() )
+        if ( ifs.fail() )
         {
             if ( default_value.has_value() )
                 return std::string { *default_value };
