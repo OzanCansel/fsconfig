@@ -14,7 +14,7 @@ namespace fsconfig
         root_path_does_not_exist( const ::std::string& path )
             :   ::std::invalid_argument
                 {
-                    path + ::std::string { " does not exist." } 
+                    path + " does not exist."
                 }
         {   }
     };
@@ -24,7 +24,7 @@ namespace fsconfig
         root_is_not_directory( const ::std::string& path )
             :   ::std::invalid_argument
                 {
-                    path + ::std::string { " is not a directory." }
+                    path + " is not a directory."
                 }
         {   }
     };
@@ -34,7 +34,7 @@ namespace fsconfig
         field_does_not_exist( const ::std::string& field )
             :   ::std::runtime_error
                 {
-                    field + ::std::string { " key does not exist." }
+                    field + " key does not exist."
                 }
         {   }
     };
@@ -44,7 +44,7 @@ namespace fsconfig
         is_not_a_field( const ::std::string& field )
             :   ::std::runtime_error
                 {
-                    field + ::std::string { " is not a field." }
+                    field + " is not a field."
                 }
         {   }
     };
@@ -54,7 +54,7 @@ namespace fsconfig
         could_not_read_content( const ::std::string& field )
             :   ::std::runtime_error 
                 {
-                    field + ::std::string { " could not be read." }
+                    field + " could not be read."
                 }
         {   }
     };
@@ -64,7 +64,7 @@ namespace fsconfig
         key_cannot_opened_or_created( const ::std::string& field )
             :   ::std::runtime_error
                 {
-                    field + ::std::string { " cannot be opened or created." }
+                    field + " cannot be opened or created."
                 }
         {   }
     };
@@ -87,12 +87,12 @@ namespace fsconfig
                         m_config.set( m_field , value );
                     }
 
-                    ::std::string value()
+                    ::std::string value() const
                     {
                         return m_config.value( m_field );
                     }
 
-                    operator ::std::string()
+                    operator ::std::string() const
                     {
                         return value();
                     }
@@ -107,15 +107,16 @@ namespace fsconfig
             inline ::std::string value(
                 std::string_view field ,
                 ::std::optional<::std::string_view> = ::std::nullopt
-            );
+            ) const;
             inline void set(
                 ::std::string_view field ,
                 ::std::string_view value = ::std::string_view {}
             );
-            inline bool is_set( ::std::string_view field );
-            inline config sub( ::std::string_view );
+            inline bool is_set( ::std::string_view field ) const;
+            inline config sub( ::std::string_view ) const;
 
             inline field_reference operator[]( ::std::string_view field );
+            inline ::std::string operator[]( ::std::string_view field ) const;
 
         private:
 
@@ -133,7 +134,7 @@ namespace fsconfig
         m_root = std::move( root );
     }
 
-    ::std::string config::value( ::std::string_view field , ::std::optional<::std::string_view> default_value )
+    ::std::string config::value( ::std::string_view field , ::std::optional<::std::string_view> default_value ) const
     {
         auto key_path = ::std::filesystem::path( m_root ) / field;
 
@@ -197,14 +198,14 @@ namespace fsconfig
         ofs.write( &( value.front() ) , value.size() );
     }
 
-    bool config::is_set( ::std::string_view field_or_group )
+    bool config::is_set( ::std::string_view field_or_group ) const
     {
         return ::std::filesystem::exists(
             ::std::filesystem::path { m_root }.append( field_or_group )
         );
     }
 
-    config config::sub( ::std::string_view relative )
+    config config::sub( ::std::string_view relative ) const
     {
         return config { ::std::filesystem::path{ m_root }.append( relative ) };
     }
@@ -212,5 +213,10 @@ namespace fsconfig
     config::field_reference config::operator[]( ::std::string_view field )
     {
         return config::field_reference { *this ,  std::move( field ) };
+    }
+
+    ::std::string config::operator[]( ::std::string_view field ) const
+    {
+        return value( field );
     }
 }

@@ -36,6 +36,13 @@ TEST_CASE( "Read a nested field" , "fsconfig::operator[]" )
     REQUIRE( config[ "engine/type" ].value() == "gasoline" );
 }
 
+TEST_CASE( "Read a field when config is const" , "fsconfig::operator[]" )
+{
+    const auto& config = conf();
+
+    REQUIRE( config[ "engine/type" ] == "gasoline" );
+}
+
 TEST_CASE( "Set a field" , "fsconfig::operator[]" )
 {
     auto config = temp_conf();
