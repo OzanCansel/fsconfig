@@ -13,7 +13,7 @@ C++17 compliant compiler is needed to make it worked.
 
 Tested only on Linux.
 
-## How to consume ?
+## How to use ?
 ### Way 1. Install to the system
 - Install __fsconfig__ as system-wide.
 ```bash
