@@ -115,7 +115,8 @@ namespace fsconfig
                 ::std::string_view value = ::std::string_view {}
             );
             inline bool is_set( ::std::string_view field ) const;
-            inline config sub( ::std::string_view ) const;
+            inline config sub( ::std::string_view )  const;
+            inline config sub( ::std::string_view , bool create_if_not_exist = true );
 
             inline field_reference operator[]( ::std::string_view field );
             inline ::std::string operator[]( ::std::string_view field ) const;
@@ -210,6 +211,16 @@ namespace fsconfig
     config config::sub( ::std::string_view relative ) const
     {
         return config { ::std::filesystem::path{ m_root }.append( relative ) };
+    }
+
+    config config::sub( ::std::string_view relative , bool create_if_not_exist )
+    {
+        auto path = ::std::filesystem::path{ m_root }.append( relative );
+
+        if ( create_if_not_exist && !::std::filesystem::exists( path ) )
+            ::std::filesystem::create_directories( path );
+
+        return config { path };
     }
 
     config::field_reference config::operator[]( ::std::string_view field )
