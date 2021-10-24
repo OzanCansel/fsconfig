@@ -21,9 +21,7 @@ cd $(mktemp -d)
 git clone https://github.com/OzanCansel/fsconfig.git
 cd fsconfig
 mkdir build && cd build
-cmake ..I doubt about whether this library will be useful or not, despite it attracts me a lot. The simplicity behind it makes me think that it will provide a nice tool C++ programmers. It also allows shell programmers to read all of the settings easily because it doesn't require any obscure and complex parsing mechanism. Just traverse directories, look for file names and read their content. So I let it go and see what will happen.
-
-
+cmake ..
 sudo cmake --build . --target install -- -j$(nproc)
 ```
 
