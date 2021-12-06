@@ -129,10 +129,10 @@ namespace fsconfig
     config::config( ::std::filesystem::path root )
     {
         if ( !::std::filesystem::exists( root ) )
-            throw root_path_does_not_exist { root };
+            throw root_path_does_not_exist { root.generic_string() };
 
         if ( !::std::filesystem::is_directory( root ) )
-            throw root_is_not_directory { root };
+            throw root_is_not_directory { root.generic_string() };
 
         m_root = std::move( root );
     }
