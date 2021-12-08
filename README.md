@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="gif/showcase-1.gif"/>
+</p>
+
 # fsconfig
 Allows a programmer to save/load configurations to/from filesystem in a structured way. Groups are mapped into directories, fields are mapped into file names and values of the fields are mapped into the file contents.
 
