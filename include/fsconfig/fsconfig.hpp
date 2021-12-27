@@ -128,13 +128,13 @@ namespace fsconfig
 
     config::config( ::std::filesystem::path root )
     {
-        if ( !::std::filesystem::exists( root ) )
+        if ( !exists( root ) )
             throw root_path_does_not_exist { root.generic_string() };
 
-        if ( !::std::filesystem::is_directory( root ) )
+        if ( !is_directory( root ) )
             throw root_is_not_directory { root.generic_string() };
 
-        m_root = std::move( root );
+        m_root = ::std::move( root );
     }
 
     ::std::string config::value( ::std::string_view field , ::std::optional<::std::string_view> default_value ) const
@@ -165,8 +165,8 @@ namespace fsconfig
         auto size = ifs.tellg();
 
         ::std::string content ( size , '\0' );
-        ifs.seekg( 0 );
 
+        ifs.seekg( 0 );
         ifs.read( &( content[ 0 ] ) , size );
 
         if ( ifs.fail() )
@@ -182,11 +182,11 @@ namespace fsconfig
 
     void config::set( ::std::string_view field , ::std::string_view value )
     {
-        auto field_path = ::std::filesystem::absolute(
+        auto field_path = absolute(
             ::std::filesystem::path { m_root }.append( field )
         );
 
-        ::std::filesystem::create_directories(
+        create_directories(
             field_path.parent_path()
         );
 
@@ -195,7 +195,7 @@ namespace fsconfig
         if ( ofs.fail() )
             throw key_cannot_opened_or_created { ::std::string { field } };
 
-        if ( value.empty() )
+        if ( empty( value ) )
             return;
         
         ofs.write( &( value.front() ) , value.size() );
@@ -218,14 +218,14 @@ namespace fsconfig
         auto path = ::std::filesystem::path{ m_root }.append( relative );
 
         if ( create_if_not_exist && !::std::filesystem::exists( path ) )
-            ::std::filesystem::create_directories( path );
+            create_directories( path );
 
         return config { path };
     }
 
     config::field_reference config::operator[]( ::std::string_view field )
     {
-        return config::field_reference { *this ,  std::move( field ) };
+        return config::field_reference { *this ,  move( field ) };
     }
 
     ::std::string config::operator[]( ::std::string_view field ) const
