@@ -5,7 +5,7 @@
 # fsconfig
 Allows a programmer to save/load configurations to/from filesystem in a structured way. Groups are mapped into directories, fields are mapped into file names and values of the fields are mapped into the file contents.
 
-For example, The `config[ "app/version" ] = "v1.0.3+343acd396c";` statement creates `app/version` directory and creates a file `version` in that directory and writes `v1.0.3+343acd396c` into it.
+For example, The `config[ "app/version" ] = "v1.0.3+343acd396c";` statement creates `app` directory and creates a file `version` in that directory and writes `v1.0.3+343acd396c` into it.
 
 It is a header only library.
 
