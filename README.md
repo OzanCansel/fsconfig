@@ -141,7 +141,7 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 Please make sure to update tests as appropriate.
 
 ## Sidenote
-I doubt about whether this library will be useful or not, despite it attracts me a lot. The simplicity behind it makes me think that it will provide a nice tool for C++ programmers. It also allows shell programmers to read all of the settings easily because it doesn't require any obscure and complex parsing mechanism. Just traverse directories, look for file names and read their content. So I let it go and see what will happen.
+I doubt about whether this library will be useful or not, despite it attracts me a lot. The simplicity behind it makes me think that it will provide a nice tool for C++ programmers. It also allows shell programmers to read all of the settings easily because it doesn't require any obscure and complex parsing mechanism. Just traverse directories, look for file names and read their content. So I let it go and see how it goes.
 
 ## License
 [MIT](https://raw.githubusercontent.com/OzanCansel/fsconfig/master/LICENSE)
